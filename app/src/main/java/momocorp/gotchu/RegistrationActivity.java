@@ -36,7 +36,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String weightVal = (String) adapterView.getItemAtPosition(i);
-                
+
             }
 
             @Override
