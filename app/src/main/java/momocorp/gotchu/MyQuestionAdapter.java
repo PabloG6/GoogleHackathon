@@ -2,6 +2,7 @@ package momocorp.gotchu;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -15,7 +16,9 @@ public class MyQuestionAdapter extends RecyclerView.Adapter<MyQuestionAdapter.Vi
 
     @Override
     public MyQuestionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_layout, parent, false);
+
+        return new ViewHolder(view);
     }
 
     @Override
@@ -25,7 +28,7 @@ public class MyQuestionAdapter extends RecyclerView.Adapter<MyQuestionAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 5;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
