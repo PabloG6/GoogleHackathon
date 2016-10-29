@@ -11,7 +11,9 @@ import android.widget.TextView;
  * Created by Pablo on 10/29/2016.
  */
 public class MyQuestionAdapter extends RecyclerView.Adapter<MyQuestionAdapter.ViewHolder> {
-    public MyQuestionAdapter(Context context){}
+    public MyQuestionAdapter(Context context){
+
+    }
 
 
     @Override
