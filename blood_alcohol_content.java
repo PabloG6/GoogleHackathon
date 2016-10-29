@@ -1,10 +1,10 @@
 public static int calcBAC(){
-    float weightLbs = 0;
-    float weightGs = weightLbs * 454;
-    float alchGrams = drinkVolume * alchCont * 0.789;
-    float weightdist;
-    float rawBac = 0, bac = 0;
-    String gender; s
+    float weightLbs = 0;// weight in pounds
+    float weightGs = weightLbs * 454; // weight in grams
+    float alchGrams = drinkVolume * alchCont * 0.789;// alcohol amount in grams
+    float weightdist; // weight * gender ratio
+    float rawBac = 0, bac = 0; // raw blood alcohol content and as a percentage
+    String gender; //gender
 
 
 
