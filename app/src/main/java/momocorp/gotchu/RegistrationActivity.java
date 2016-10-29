@@ -12,7 +12,8 @@ import android.widget.Spinner;
 
 public class RegistrationActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    Spinner weightTypeSpinner, heightTypeSpinner, ageTypeSpinner, genderSpinner;
+    RegistrationInfo registrationInfo;
+    Spinner weightTypeSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +21,10 @@ public class RegistrationActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //instantiate recyclerView;
+
+        registrationInfo = new RegistrationInfo(this);
+        registrationInfo.setFirstName("Shumba");
+        Log.i("TAG", registrationInfo.getFirstName());
 
         weightTypeSpinner = (Spinner) findViewById(R.id.weight_type_spinner);
         ArrayAdapter<CharSequence> weightChoices = ArrayAdapter.
@@ -30,7 +35,7 @@ public class RegistrationActivity extends AppCompatActivity {
         weightTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String weightType = (String) adapterView.getItemAtPosition(i);
+                String weightVal = (String) adapterView.getItemAtPosition(i);
 
             }
 
@@ -39,39 +44,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
             }
         });
-
-
-        //height stuff
-        heightTypeSpinner = (Spinner) findViewById(R.id.height_type_spinner);
-        ArrayAdapter heightAdapt = ArrayAdapter.
-                createFromResource(this, R.array.height_choices, android.R.layout.simple_spinner_item);
-        heightAdapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        heightTypeSpinner.setAdapter(heightAdapt);
-        heightTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-               switch (i){
-                   case 1:
-                       // TODO: 10/29/2016 change value to centimeter
-
-               }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        //gender stuff
-        genderSpinner = (Spinner) findViewById(R.id.gender_spinner);
-        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter
-                .createFromResource(this, R.array.gender_choices, android.R.layout.simple_spinner_item);
-        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        genderSpinner.setAdapter(genderAdapter);
-
-
-
-
 
 
 
