@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="weight_choices">
-        <item>pds</item>
         <item>kgs</item>
+        <item>pds</item>
+    </string-array>
+    <string-array name="height_choices">
+        <item>ft</item>
+        <item>cm</item>
+    </string-array>
+    <string-array name="gender_choices" >
+        <item>male</item>
+        <item>female</item>
     </string-array>
 </resources>
