@@ -12,12 +12,16 @@ import android.content.SharedPreferences;
 public class RegistrationInfo  {
 
     Context context;
+    SharedPreferences sharedPref;
+
 
     public RegistrationInfo (Context context) {
         this.context = context;
+        sharedPref = context.getSharedPreferences("RegistrationInfo", Context.MODE_PRIVATE);
+
+
     }
 
-    SharedPreferences sharedPref = context.getSharedPreferences("RegistrationInfo", Context.MODE_PRIVATE);
 
 
     public void setFirstName(String value) {
