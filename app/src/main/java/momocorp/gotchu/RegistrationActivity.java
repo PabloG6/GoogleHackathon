@@ -41,7 +41,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                ageVal =  Float.parseFloat((String) charSequence);
+                ageVal =  Float.parseFloat(String.valueOf(charSequence));
             }
 
             @Override
@@ -60,7 +60,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                heightVal = Float.parseFloat((String) charSequence);
+                heightVal = Float.parseFloat(String.valueOf(charSequence));
             }
 
             @Override
@@ -79,7 +79,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                weightVal = Float.parseFloat((String) charSequence);
+                weightVal = Float.parseFloat(String.valueOf(charSequence));
             }
 
             @Override
@@ -98,7 +98,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                first_name = (String) charSequence;
+                first_name = String.valueOf(charSequence);
             }
 
             @Override
@@ -117,7 +117,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                last_name = (String) charSequence;
+                last_name = String.valueOf(charSequence);
             }
 
             @Override

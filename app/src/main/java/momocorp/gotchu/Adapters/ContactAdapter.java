@@ -34,7 +34,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             super(itemView);
 
             name = (TextView) itemView.findViewById(R.id.contact_name);
-            phoneNumber = (TextView) itemView.findViewById(R.id.phone_number);
+            phoneNumber = (TextView) itemView.findViewById(R.id.contact_number);
         }
     }
 }
