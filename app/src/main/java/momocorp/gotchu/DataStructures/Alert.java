@@ -5,4 +5,6 @@ package momocorp.gotchu.DataStructures;
  */
 
 public class Alert {
+
+
 }
