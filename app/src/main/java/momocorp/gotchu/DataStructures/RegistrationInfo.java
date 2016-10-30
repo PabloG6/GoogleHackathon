@@ -1,4 +1,4 @@
-package momocorp.gotchu;
+package momocorp.gotchu.DataStructures;
 
 import android.content.Context;
 import android.content.SharedPreferences;
