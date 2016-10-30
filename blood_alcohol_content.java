@@ -3,18 +3,17 @@ float time,float bac ,String gender){
     /* units are assumed to be as follows:
         - Volume : Fluid ounces
         - Weight: Pounds (lbs)
-        - Time: Hours
+        - Time: Minutes
 
     */
-    float alclvl, vol, weightLbs, time, bac;
-    String gender;
+    float timeH = convertMins(time);
 
     if f(sex == "Female"){
-        bac = alclvl * vol * * 0.823 * 0.66 / (16 * weight) - 0.015 * t;
+        bac = alclvl * vol * * 0.823 * 0.66 / (16 * weight) - 0.015 * timeH;
 
     }
     else{
-        bac = alclvl * vol * * 0.823 * 0.73 / (16 * weight) - 0.015 * t;
+        bac = alclvl * vol * * 0.823 * 0.73 / (16 * weight) - 0.015 * timeH;
     }
 
     return bac;
