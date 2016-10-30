@@ -13,7 +13,14 @@ public class RegistrationInfo  {
 
     Context context;
     SharedPreferences sharedPref;
-
+    public static final String WEIGHT = "WEIGHT";
+    public static final String FIRST = "FIRST";
+    public static final String LAST = "LAST";
+    public static final String GENDER = "GEN";
+    public static final String HEIGHT = "HEI";
+    public static final String F_EM_CON = "first emergency contact";
+    public static final String L_EM_CON = "s_em_con";
+    public static final String AGE = "age";
 
     public RegistrationInfo (Context context) {
         this.context = context;
@@ -31,8 +38,7 @@ public class RegistrationInfo  {
     }
 
     public String getFirstName() {
-        String value = sharedPref.getString("First Name", "");
-        return value;
+        return sharedPref.getString("First Name", "");
     }
 
     public void setLastName(String value) {
@@ -42,8 +48,7 @@ public class RegistrationInfo  {
     }
 
     public String getLastName() {
-        String value = sharedPref.getString("Last Name", "");
-        return value;
+        return sharedPref.getString("Last Name", "");
     }
 
     public void setEmergencyContactFirstName(String value) {
@@ -53,8 +58,7 @@ public class RegistrationInfo  {
     }
 
     public String getEmergencyContactFirstName() {
-        String value = sharedPref.getString("Emergency Contact First Name", "");
-        return value;
+        return sharedPref.getString("Emergency Contact First Name", "");
     }
 
     public void setEmergencyContactLastName(String value) {
@@ -64,8 +68,7 @@ public class RegistrationInfo  {
     }
 
     public String getEmergencyContactLastName() {
-        String value = sharedPref.getString("Emergency Contact Last Name", "");
-        return value;
+        return sharedPref.getString("Emergency Contact Last Name", "");
     }
 
     public void setGender(String value) {
@@ -79,48 +82,45 @@ public class RegistrationInfo  {
         return value;
     }
 
-    public void setAge(int value) {
+    public void setAge(float value) {
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("Age", value);
+        editor.putFloat(AGE, value);
         editor.apply();
     }
 
-    public int getAge() {
-        int value = sharedPref.getInt("Age", 0);
+    public float getAge() {
+        float value = sharedPref.getFloat(AGE, 0);
         return value;
     }
 
-    public void setWeight(int value) {
+    public void setWeight(float value) {
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("Weight", value);
+        editor.putFloat("Weight", value);
         editor.apply();
     }
 
-    public int getWeight() {
-        int value = sharedPref.getInt("Weight", 0);
-        return value;
+    public long getWeight() {
+        return sharedPref.getLong(WEIGHT, 0);
     }
 
-    public void setHeight(int value) {
+    public void setHeight(float value) {
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("Height", value);
+        editor.putFloat(HEIGHT, value);
         editor.apply();
     }
 
-    public int getHeight() {
-        int value = sharedPref.getInt("Height", 0);
-        return value;
+    public float getHeight() {
+        return sharedPref.getFloat("Height", 0);
     }
 
-    public void setEmergencyContactNumber(int value) {
+    public void setEmergencyContactNumber(float value) {
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("Emergency Contact Number", value);
+        editor.putFloat(F_EM_CON, value);
         editor.apply();
     }
 
-    public int getEmergencyContactNumber() {
-        int value = sharedPref.getInt("Emergency Contact Number", 0);
-        return value;
+    public float getEmergencyContactNumber() {
+        return sharedPref.getFloat(F_EM_CON, 0);
     }
 
 
