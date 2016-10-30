@@ -22,11 +22,12 @@ public class RegistrationInfo  {
     public static final String F_EM_CON = "first emergency contact";
     public static final String L_EM_CON = "s_em_con";
     public static final String AGE = "age";
+    public static final String REG_INFO = "RegistrationInfo";
     private String secEmergenConName;
 
     public RegistrationInfo (Context context) {
         this.context = context;
-        sharedPref = context.getSharedPreferences("RegistrationInfo", Context.MODE_PRIVATE);
+        sharedPref = context.getSharedPreferences(REG_INFO, Context.MODE_PRIVATE);
 
 
     }

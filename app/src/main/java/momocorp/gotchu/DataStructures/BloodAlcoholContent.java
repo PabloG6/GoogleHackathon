@@ -1,6 +1,7 @@
 package momocorp.gotchu.DataStructures;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 /**
  * Created by ShumbaBrown on 10/29/16.
@@ -10,10 +11,14 @@ public class BloodAlcoholContent {
 
     RegistrationInfo registrationInfo;
     public int totalDrinks = 0;
+    SharedPreferences sharedPreferences;
 
 
     public BloodAlcoholContent(Context context){
          registrationInfo = new RegistrationInfo(context);
+        sharedPreferences = context.getSharedPreferences(RegistrationInfo.REG_INFO, Context.MODE_PRIVATE);
+        
+
     }
 
     public int calculateAlcoholGrams(int totalDrinks){
