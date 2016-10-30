@@ -16,7 +16,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import momocorp.gotchu.DataStructures.RegistrationInfo;
 import momocorp.gotchu.DataStructures.UnitConverter;
 
 
@@ -34,14 +38,15 @@ public class RegistrationFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    RecyclerView recyclerView;
+
     Spinner weightTypeSpinner, heightTypeSpinner, genderSpinner;
     TextInputEditText age, height, firstName, lastName, weight;
     float ageVal, heightVal, weightVal;
     String first_name, last_name;
-    FrameLayout frameLayout;
+
     Button getContact;
-    ContactListFragment contactListFragment;
+    TextView emergenCon1;
+    TextView emergenCon2;
     UnitConverter unitConverter = new UnitConverter();
     String gender;
 
@@ -49,6 +54,7 @@ public class RegistrationFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    RegistrationInfo regInfo;
 
     private RegistrationFragmentListener mListener;
 
@@ -89,7 +95,10 @@ public class RegistrationFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for getActivity() fragment
         mListener = (RegistrationFragmentListener) getActivity();
+        regInfo = new RegistrationInfo(getActivity());
         View view = inflater.inflate(R.layout.fragment_registration, container, false);
+        emergenCon1 = (TextView) view.findViewById(R.id.emergency_contact_info_1);
+        emergenCon2 = (TextView)view.findViewById(R.id.emergency_contact_info_2);
 
 
         age = (TextInputEditText) view.findViewById(R.id.age);
@@ -101,7 +110,14 @@ public class RegistrationFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                ageVal =  Float.parseFloat(String.valueOf(charSequence));
+                if (charSequence.length() != 0) {
+                    ageVal =  Float.parseFloat(String.valueOf(charSequence));
+                    regInfo.setAge(ageVal);
+                }
+                else {
+                    regInfo.setAge(ageVal);
+                }
+
             }
 
             @Override
@@ -120,7 +136,14 @@ public class RegistrationFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                heightVal = Float.parseFloat(String.valueOf(charSequence));
+                if (heightVal!=0) {
+                    heightVal = Float.parseFloat(String.valueOf(charSequence));
+                    regInfo.setHeight(heightVal);
+
+                }
+                else{
+                    regInfo.setHeight(heightVal);
+                }
             }
 
             @Override
@@ -139,8 +162,12 @@ public class RegistrationFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                weightVal = Float.parseFloat(String.valueOf(charSequence));
+                if (charSequence.length()!=0) {
+                    weightVal = Float.parseFloat(String.valueOf(charSequence));
+                    regInfo.setWeight(weightVal);
+                }
             }
+
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -159,6 +186,7 @@ public class RegistrationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 first_name = String.valueOf(charSequence);
+                regInfo.setFirstName(first_name);
             }
 
             @Override
@@ -178,6 +206,8 @@ public class RegistrationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 last_name = String.valueOf(charSequence);
+                regInfo.setLastName(last_name);
+
             }
 
             @Override
@@ -200,6 +230,9 @@ public class RegistrationFragment extends Fragment {
                 if (i!=0) {
                     weightVal = unitConverter.convertToKG(weightVal);
                 }
+                else {
+                    regInfo.setWeight(weightVal);
+                }
 
 
             }
@@ -213,7 +246,7 @@ public class RegistrationFragment extends Fragment {
 
         //height stuff
         heightTypeSpinner = (Spinner) view.findViewById(R.id.height_type_spinner);
-        ArrayAdapter heightAdapt = ArrayAdapter.
+        final ArrayAdapter heightAdapt = ArrayAdapter.
                 createFromResource(getActivity(), R.array.height_choices, android.R.layout.simple_spinner_item);
         heightAdapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         heightTypeSpinner.setAdapter(heightAdapt);
@@ -223,7 +256,11 @@ public class RegistrationFragment extends Fragment {
                 if (i!=0){
                     // TODO: 10/29/2016 convert getActivity() to cm
                     heightVal = unitConverter.convertToCM((float) adapterView.getItemAtPosition(i));
+                    regInfo.setHeight(heightVal);
 
+                }
+                else {
+                    regInfo.setHeight(heightVal);
                 }
             }
 
@@ -234,7 +271,7 @@ public class RegistrationFragment extends Fragment {
         });
         //gender stuff
         genderSpinner = (Spinner) view.findViewById(R.id.gender_spinner);
-        ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter
+        final ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter
                 .createFromResource(getActivity(), R.array.gender_choices, android.R.layout.simple_spinner_item);
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderAdapter);
@@ -243,6 +280,7 @@ public class RegistrationFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 gender = (String) adapterView.getItemAtPosition(i);
+                regInfo.setGender(gender);
             }
 
             @Override
@@ -258,6 +296,7 @@ public class RegistrationFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mListener.getContactInformation();
+                getContact.setEnabled(false);
             }
         });
 
@@ -289,6 +328,12 @@ public class RegistrationFragment extends Fragment {
         mListener = null;
     }
 
+
+    public void setEmergenCon(String i1, String i2){
+        emergenCon1.setText(i1);
+        emergenCon2.setText(i2);
+    }
+
     /**
      * getActivity() interface must be implemented by activities that contain getActivity()
      * fragment to allow an interaction in getActivity() fragment to be communicated
@@ -302,5 +347,6 @@ public class RegistrationFragment extends Fragment {
     public interface RegistrationFragmentListener {
         // TODO: Update argument type and name
         void getContactInformation();
+        void completeEmergencyPick();
     }
 }

@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 
 public class RegistrationInfo  {
 
+    private static final String S_EM_CON = "S_EM_CON";
     Context context;
     SharedPreferences sharedPref;
     public static final String WEIGHT = "WEIGHT";
@@ -21,6 +22,7 @@ public class RegistrationInfo  {
     public static final String F_EM_CON = "first emergency contact";
     public static final String L_EM_CON = "s_em_con";
     public static final String AGE = "age";
+    private String secEmergenConName;
 
     public RegistrationInfo (Context context) {
         this.context = context;
@@ -113,17 +115,23 @@ public class RegistrationInfo  {
         return sharedPref.getFloat("Height", 0);
     }
 
-    public void setEmergencyContactNumber(float value) {
+    public void setEmergencyContactNumber(String value) {
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putFloat(F_EM_CON, value);
+        editor.putString(F_EM_CON, value);
         editor.apply();
     }
+    public void setSecEmergenConName(String i1){
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(S_EM_CON, i1);
+        editor.apply();
 
-    public float getEmergencyContactNumber() {
-        return sharedPref.getFloat(F_EM_CON, 0);
     }
 
 
+    public String getSecEmergenConName() {
+
+        return secEmergenConName;
+    }
 }
 
 
