@@ -1,22 +1,28 @@
-public static int calcBAC(){
-    float weightLbs = 0;// weight in pounds
-    float weightGs = weightLbs * 454; // weight in grams
-    float alchGrams = drinkVolume * alchCont * 0.789;// alcohol amount in grams
-    float weightdist; // weight * gender ratio
-    float rawBac = 0, bac = 0; // raw blood alcohol content and as a percentage
-    String gender; //gender
+public static float calcBAC(float alclvl, float vol, float weightLbs,
+float time,float bac ,String gender){
+    /* units are assumed to be as follows:
+        - Volume : Fluid ounces
+        - Weight: Pounds (lbs)
+        - Time: Minutes
 
+    */
+    float timeH = convertMins(time);
 
+    if f(sex == "Female"){
+        bac = alclvl * vol * * 0.823 * 0.66 / (16 * weight) - 0.015 * timeH;
 
-    if (gender == 'Male'){
-        weightdist = weightGs * 0.68
     }
-    else if (gender == 'Female'){
-        weightdist = weightGs * 0.55;
+    else{
+        bac = alclvl * vol * * 0.823 * 0.73 / (16 * weight) - 0.015 * timeH;
     }
-
-    rawBac = alchGrams / weightdist;
-    bac = rawBac * 100;
 
     return bac;
+
+}
+
+public static float convertMins(float mins){
+    float hours;
+
+    hours = mins/60;
+    return hours;
 }
