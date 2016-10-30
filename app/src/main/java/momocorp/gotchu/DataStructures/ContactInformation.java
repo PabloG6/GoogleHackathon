@@ -12,10 +12,10 @@ import java.util.ArrayList;
 /**
  * Created by Pablo on 10/29/2016.
  */
-class ContactInformation {
+public class ContactInformation {
 
-    public ArrayList<ContactStructure> fetchContact(Context context){
-        ArrayList<ContactStructure> arrayStructure = new ArrayList<>();
+    public ArrayList<ContactStructures> fetchContact(Context context) {
+        ArrayList<ContactStructures> arrayStructure = new ArrayList<>();
 
         ContentResolver cr = context.getContentResolver();
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI,
@@ -27,7 +27,7 @@ class ContactInformation {
                         cur.getColumnIndex(ContactsContract.Contacts._ID));
                 String name = cur.getString(cur.getColumnIndex(
                         ContactsContract.Contacts.DISPLAY_NAME));
-                ContactStructure contact = new ContactStructure();
+                ContactStructures contact = new ContactStructures();
                 contact.setName(name);
 
                 if (cur.getInt(cur.getColumnIndex(
@@ -35,7 +35,7 @@ class ContactInformation {
                     Cursor pCur = cr.query(
                             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
                             null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = ?",
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
                             new String[]{id}, null);
 
                     while (pCur.moveToNext()) {
@@ -55,39 +55,5 @@ class ContactInformation {
 
         return arrayStructure;
     }
-
-class ContactStructure{
-    String phoneNumber;
-    String name;
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ContactStructure() {
-    }
-
-
-
-    public ContactStructure(String name, String phoneNumber) {
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-    }
-
-
-
-}
 
 }

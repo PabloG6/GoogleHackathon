@@ -77,8 +77,8 @@ public class ContactListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contact_list, container, false);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.contact_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new ContactAdapter());
-        return inflater.inflate(R.layout.fragment_contact_list, container, false);
+        recyclerView.setAdapter(new ContactAdapter(getActivity()));
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -95,7 +95,7 @@ public class ContactListFragment extends Fragment {
             mListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement RegistrationFragmentListener");
         }
     }
 
