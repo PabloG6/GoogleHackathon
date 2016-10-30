@@ -1,11 +1,11 @@
 package momocorp.gotchu;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -13,12 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import java.util.HashMap;
 
 import momocorp.gotchu.DataStructures.RegistrationInfo;
 import momocorp.gotchu.DataStructures.UnitConverter;
@@ -39,11 +39,10 @@ public class RegistrationFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
 
-    Spinner weightTypeSpinner, heightTypeSpinner, genderSpinner;
     TextInputEditText age, height, firstName, lastName, weight;
-    float ageVal, heightVal, weightVal;
+    long ageVal, heightVal, weightVal;
     String first_name, last_name;
-
+    AutoCompleteTextView genderEdit;
     Button getContact;
     TextView emergenCon1;
     TextView emergenCon2;
@@ -55,7 +54,6 @@ public class RegistrationFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     RegistrationInfo regInfo;
-
     private RegistrationFragmentListener mListener;
 
     public RegistrationFragment() {
@@ -97,9 +95,8 @@ public class RegistrationFragment extends Fragment {
         mListener = (RegistrationFragmentListener) getActivity();
         regInfo = new RegistrationInfo(getActivity());
         View view = inflater.inflate(R.layout.fragment_registration, container, false);
-        emergenCon1 = (TextView) view.findViewById(R.id.emergency_contact_info_1);
-        emergenCon2 = (TextView)view.findViewById(R.id.emergency_contact_info_2);
 
+        genderEdit = (AutoCompleteTextView) view.findViewById(R.id.gender);
 
         age = (TextInputEditText) view.findViewById(R.id.age);
         age.addTextChangedListener(new TextWatcher() {
@@ -111,7 +108,7 @@ public class RegistrationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.length() != 0) {
-                    ageVal =  Float.parseFloat(String.valueOf(charSequence));
+                    ageVal =  Long.parseLong(String.valueOf(charSequence));
                     regInfo.setAge(ageVal);
                 }
                 else {
@@ -137,7 +134,7 @@ public class RegistrationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (heightVal!=0) {
-                    heightVal = Float.parseFloat(String.valueOf(charSequence));
+                    heightVal = Long.parseLong(String.valueOf(charSequence));
                     regInfo.setHeight(heightVal);
 
                 }
@@ -163,8 +160,8 @@ public class RegistrationFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.length()!=0) {
-                    weightVal = Float.parseFloat(String.valueOf(charSequence));
-                    regInfo.setWeight(weightVal);
+                    weightVal = Long.parseLong(String.valueOf(charSequence));
+
                 }
             }
 
@@ -218,77 +215,19 @@ public class RegistrationFragment extends Fragment {
 
 
 
-        weightTypeSpinner = (Spinner) view.findViewById(R.id.weight_type_spinner);
         ArrayAdapter<CharSequence> weightChoices = ArrayAdapter.
                 createFromResource(getActivity(), R.array.weight_choices, android.R.layout.simple_spinner_item);
 
         weightChoices.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        weightTypeSpinner.setAdapter(weightChoices);
-        weightTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i!=0) {
-                    weightVal = unitConverter.convertToKG(weightVal);
-                }
-                else {
-                    regInfo.setWeight(weightVal);
-                }
 
 
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-
-        //height stuff
-        heightTypeSpinner = (Spinner) view.findViewById(R.id.height_type_spinner);
-        final ArrayAdapter heightAdapt = ArrayAdapter.
-                createFromResource(getActivity(), R.array.height_choices, android.R.layout.simple_spinner_item);
-        heightAdapt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        heightTypeSpinner.setAdapter(heightAdapt);
-        heightTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i!=0){
-                    // TODO: 10/29/2016 convert getActivity() to cm
-                    heightVal = unitConverter.convertToCM((float) adapterView.getItemAtPosition(i));
-                    regInfo.setHeight(heightVal);
-
-                }
-                else {
-                    regInfo.setHeight(heightVal);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         //gender stuff
-        genderSpinner = (Spinner) view.findViewById(R.id.gender_spinner);
+
         final ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter
                 .createFromResource(getActivity(), R.array.gender_choices, android.R.layout.simple_spinner_item);
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        genderSpinner.setAdapter(genderAdapter);
-
-        genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                gender = (String) adapterView.getItemAtPosition(i);
-                regInfo.setGender(gender);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
+        genderEdit.setAdapter(genderAdapter);
 
 
         getContact = (Button) view.findViewById(R.id.emergency_contact_button);
@@ -329,10 +268,19 @@ public class RegistrationFragment extends Fragment {
     }
 
 
-    public void setEmergenCon(String i1, String i2){
-        emergenCon1.setText(i1);
-        emergenCon2.setText(i2);
+    public void setInformation(){
+        SharedPreferences sharedPreferences =
+                getActivity()
+                        .getSharedPreferences(RegistrationInfo.REG_INFO, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(RegistrationInfo.NAME, first_name+" "+last_name);
+        editor.putLong(RegistrationInfo.HEIGHT, heightVal);
+        editor.putLong(RegistrationInfo.AGE, ageVal);
+        editor.putLong(RegistrationInfo.WEIGHT, weightVal);
+        editor.putString(RegistrationInfo.GENDER, genderEdit.getText().toString());
+        editor.apply();
     }
+
 
     /**
      * getActivity() interface must be implemented by activities that contain getActivity()

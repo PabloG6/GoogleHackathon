@@ -21,5 +21,18 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_drink_selection" />
+    <RelativeLayout
+        android:id="@+id/frag_layout"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/submit_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_done_white_36dp"
+        app:layout_anchor="@+id/frag_layout"
+        app:layout_anchorGravity="bottom|end" />
 </android.support.design.widget.CoordinatorLayout>

@@ -29,7 +29,7 @@ public class DrinkTypeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    DrinkAdapter drinkAdapter;
     private OnFragmentInteractionListener mListener;
 
     public DrinkTypeFragment() {
@@ -67,10 +67,11 @@ public class DrinkTypeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        drinkAdapter = new DrinkAdapter();
         View view = inflater.inflate(R.layout.fragment_drink_type, container, false);
         RecyclerView drinkList = (RecyclerView) view.findViewById(R.id.drink_types);
         drinkList.setLayoutManager(new LinearLayoutManager(getActivity()));
-        drinkList.setAdapter(new DrinkAdapter());
+        drinkList.setAdapter(drinkAdapter);
         return view;
     }
 
@@ -96,6 +97,10 @@ public class DrinkTypeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void submitNumberOfDrinks() {
+        drinkAdapter.submitDrinks();
     }
 
     /**

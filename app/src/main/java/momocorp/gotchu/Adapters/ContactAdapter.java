@@ -1,6 +1,7 @@
 package momocorp.gotchu.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +25,16 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
     ArrayList<ContactStructures> contactList;
     RegistrationInfo regInfo;
     public int pickTwo;
+    SharedPreferences sharedPreferences;
     RegistrationFragment.RegistrationFragmentListener regListener;
 
     public ContactAdapter(Context context) {
         this.context = context;
         contactList = new ContactInformation().fetchContact(context);
         regInfo = new RegistrationInfo(context);
-
         regListener = (RegistrationFragment.RegistrationFragmentListener) context;
+      sharedPreferences = context.getSharedPreferences(RegistrationInfo.REG_INFO, Context.MODE_PRIVATE);
+
 
     }
 
@@ -51,14 +54,19 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 if (pickTwo == 0){
-                    regInfo.setEmergencyContactFirstName(name);
-                    regInfo.setEmergencyContactNumber(phone);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(RegistrationInfo.EMERGENCY_PHONE_NUM, phone);
+                    editor.putString(RegistrationInfo.F_EM_CON, name).apply();
                     pickTwo++;
 
                 } else if (pickTwo==1) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(RegistrationInfo.S_EM_CON, name);
+                    editor.putString(RegistrationInfo.S_EM_PHONE, phone);
+                    editor.apply();
 
-                    regInfo.setSecEmergenConName(name);
-                    regInfo.setSecEmergenConName(phone);
+
+
                     pickTwo++;
                 }
 

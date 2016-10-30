@@ -52,6 +52,7 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
             @Override
             public void onClick(View view) {
                 // TODO: 10/29/2016 select type of drinks fragment
+                registrationFragment.setInformation();
                 Intent intent = new Intent(context, DrinkSelectionActivity.class);
                 startActivity(intent);
             }
@@ -68,7 +69,6 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     @Override
     public void completeEmergencyPick() {
         getFragmentManager().beginTransaction().remove(contactListFragment).commit();
-        registrationFragment.setEmergenCon(regInfo.getEmergencyContactFirstName(), regInfo.getSecEmergenConName());
 
 
     }

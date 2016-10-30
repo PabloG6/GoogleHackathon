@@ -2,67 +2,34 @@ package momocorp.gotchu.DataStructures;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by ShumbaBrown on 10/29/16.
  */
 
 public class BloodAlcoholContent {
+    public static final long femCon = (long) 0.66;
+    public static final long malCon = (long) 0.73;
+    public static final long alcGram = (long) 14;
+    String gender = "Male";
+    public static long totalDrinks = 0;
 
-    RegistrationInfo registrationInfo;
-    public int totalDrinks = 0;
-    SharedPreferences sharedPreferences;
-
-
-    public BloodAlcoholContent(Context context){
-         registrationInfo = new RegistrationInfo(context);
-        sharedPreferences = context.getSharedPreferences(RegistrationInfo.REG_INFO, Context.MODE_PRIVATE);
-        
-
-    }
-
-    public int calculateAlcoholGrams(int totalDrinks){
-
-        int totalGrams = totalDrinks * 14;
-
-        return totalGrams;
-
-    }
-
-    public int addDrink(){
-        return totalDrinks++;
+    public BloodAlcoholContent(Context context) {
+        gender = context.
+                getSharedPreferences(RegistrationInfo.REG_INFO, Context.MODE_PRIVATE).
+                getString(RegistrationInfo.GENDER, "Male");
     }
 
 
+    public double calculateBloodAlcoholContent() {
+        return totalDrinks *0.02;
 
-    public float calculateBloodAlcoholContent(float gramsAlcohol, float time){
-    /* units are assumed to be as follows:
-        - Volume : Fluid ounces
-        - Weight: Pounds (lbs)
-        - Time: Milliseconds
-
-    */
-        float bac = 0.0f;
-        float timeH = convertMilliseconds(time);
-
-        if (registrationInfo.getGender() == "Female"){
-            bac = (float) (gramsAlcohol / (0.66 * (454 * registrationInfo.getWeight())) - (0.015 * timeH));
-
-        }
-        else{
-            bac = (float) (gramsAlcohol / (0.73 * (454 * registrationInfo.getWeight())) - (0.015 * timeH));
-        }
-
-        return bac;
 
     }
 
-    public float convertMilliseconds(float milliseconds){
-        float hours;
-
-        hours = (milliseconds/1000)/3600;
-        return hours;
-    }
 }
 
 

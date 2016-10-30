@@ -10,7 +10,7 @@ public class UnitConverter {
 
     public float convertToCM(float feet) {
 
-        return (float) ((float) feet/2.2);
+        return feet;
     }
 
 

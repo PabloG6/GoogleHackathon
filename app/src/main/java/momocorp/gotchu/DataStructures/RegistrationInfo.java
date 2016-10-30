@@ -11,7 +11,15 @@ import android.content.SharedPreferences;
 
 public class RegistrationInfo  {
 
-    private static final String S_EM_CON = "S_EM_CON";
+    public static final String S_EM_CON = "S_EM_CON";
+    public static final String TOTAL_DRINK = "TOTAL DRINIKS";
+    public static final String EL_TIME = "ELAPSED TIME";
+    public static final String AL_CONTENT = "Alcohol Content";
+    public static final String NAME = "NAME";
+
+    public static final String EMERGENCY_PHONE_NUM = "EMERGENCY NUMBER";
+    public static final String S_EM_PHONE = "S EM PHONE";
+
     Context context;
     SharedPreferences sharedPref;
     public static final String WEIGHT = "WEIGHT";
@@ -24,10 +32,13 @@ public class RegistrationInfo  {
     public static final String AGE = "age";
     public static final String REG_INFO = "RegistrationInfo";
     private String secEmergenConName;
+    private int elapsedTime;
+    private float currentTime;
 
     public RegistrationInfo (Context context) {
         this.context = context;
         sharedPref = context.getSharedPreferences(REG_INFO, Context.MODE_PRIVATE);
+
 
 
     }
@@ -98,7 +109,7 @@ public class RegistrationInfo  {
 
     public void setWeight(float value) {
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putFloat("Weight", value);
+        editor.putFloat(WEIGHT, value);
         editor.apply();
     }
 
@@ -127,12 +138,33 @@ public class RegistrationInfo  {
         editor.apply();
 
     }
+//var list = [];
 
 
     public String getSecEmergenConName() {
 
         return secEmergenConName;
     }
+
+    public void setCurrentTime(float currentTime) {
+        this.currentTime = currentTime;
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putFloat(EL_TIME, currentTime);
+        editor.apply();
+    }
+
+    public int getElapsedTime() {
+        elapsedTime = (int) (currentTime - System.currentTimeMillis());
+        return elapsedTime;
+    }
+
+    public void setAlcoholContent(long alcoholContent) {
+        SharedPreferences.Editor edit = context.getSharedPreferences(RegistrationInfo.REG_INFO, Context.MODE_PRIVATE).edit();
+        edit.putLong(AL_CONTENT, alcoholContent).apply();
+
+    }
+
+
 }
 
 
