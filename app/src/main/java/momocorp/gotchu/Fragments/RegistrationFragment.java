@@ -1,4 +1,4 @@
-package momocorp.gotchu;
+package momocorp.gotchu.Fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,17 +11,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
-
-import java.util.HashMap;
 
 import momocorp.gotchu.DataStructures.RegistrationInfo;
 import momocorp.gotchu.DataStructures.UnitConverter;
+import momocorp.gotchu.R;
 
 
 /**
@@ -77,7 +74,7 @@ public class RegistrationFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,7 +88,7 @@ public class RegistrationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for getActivity() fragment
+
         mListener = (RegistrationFragmentListener) getActivity();
         regInfo = new RegistrationInfo(getActivity());
         View view = inflater.inflate(R.layout.fragment_registration, container, false);
@@ -241,6 +238,7 @@ public class RegistrationFragment extends Fragment {
 
 
         return view;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

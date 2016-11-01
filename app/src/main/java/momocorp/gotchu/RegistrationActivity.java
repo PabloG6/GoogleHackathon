@@ -2,24 +2,15 @@ package momocorp.gotchu;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.Spinner;
 
 import momocorp.gotchu.DataStructures.RegistrationInfo;
-import momocorp.gotchu.DataStructures.UnitConverter;
+import momocorp.gotchu.Fragments.ContactListFragment;
+import momocorp.gotchu.Fragments.RegistrationFragment;
 
 public class RegistrationActivity extends AppCompatActivity implements RegistrationFragment.RegistrationFragmentListener {
     private static final String CON_FRAG = "CON";

@@ -15,7 +15,7 @@ import momocorp.gotchu.DataStructures.ContactInformation;
 import momocorp.gotchu.DataStructures.ContactStructures;
 import momocorp.gotchu.DataStructures.RegistrationInfo;
 import momocorp.gotchu.R;
-import momocorp.gotchu.RegistrationFragment;
+import momocorp.gotchu.Fragments.RegistrationFragment;
 
 /**
  * Created by Pablo on 10/29/2016.

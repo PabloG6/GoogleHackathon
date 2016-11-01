@@ -99,6 +99,11 @@ public class DrunkService extends Service {
             super(name);
         }
 
+       public NotificationService(){
+           super("NotificationService");
+
+       }
+
         @Override
         protected void onHandleIntent(Intent intent) {
             String action = intent.getAction();
